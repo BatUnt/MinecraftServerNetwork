@@ -1,6 +1,7 @@
 package org.mcservernetwork.client.task;
 
-import com.connorlinfoot.actionbarapi.ActionBarAPI;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -25,11 +26,11 @@ public class ActionBarTask implements Runnable {
             String name = StringUtils.capitalizeFirstLetter(nearest.getSectorName());
             PacketStatus status = KeepAliveHandler.get(nearest.getSectorName());
             if (status == null) {
-                ActionBarAPI.sendActionBar(player,
-                        ColorUtils.fixColors("&4\u2716 Sector &4&l" + name + " &4is not responding. \u2716"));
+                player.spigot()
+                        .sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ColorUtils.fixColors("&4\u2716 Sector &4&l" + name + " &4is not responding. \u2716")));
             } else {
-                ActionBarAPI.sendActionBar(player,
-                        ColorUtils.fixColors("&a\u2714 TPS: &a&l" + status.tps + "&a, online: &a&l" + status.players + " &a\u2714"));
+                player.spigot()
+                        .sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ColorUtils.fixColors("&a\u2714 TPS: &a&l" + status.tps + "&a, online: &a&l" + status.players + " &a\u2714")));
             }
         }
     }
